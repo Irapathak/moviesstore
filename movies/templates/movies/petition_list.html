@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Petitions</h2>
+  <ul>
+    {% for petition in petitions %}
+      <li>
+        <strong>{{ petition.movie_name }}</strong>: {{ petition.description }}
+        <br>
+        Votes: {{ petition.votes }}
+        <form method="post" action="{% url 'movies.vote_petition' petition.id %}">
+          {% csrf_token %}
+          <button type="submit">Vote</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
